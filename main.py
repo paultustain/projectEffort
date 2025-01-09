@@ -9,9 +9,16 @@ parser.add_argument(
     default=None
 )
 
+parser.add_argument(
+    "-a", 
+    "--aims", 
+    help="Aims for the session", 
+    default=[None]
+)
+
 args = parser.parse_args()
-print(args.project)
-vis = Visualiser()
+print(args.project, args.aims)
+vis = Visualiser(args.project)
 
 # print(timer)
 
