@@ -4,11 +4,30 @@ class Visualiser:
     FULL_WIDTH = 180
     AIMS_WIDTH = (3 * FULL_WIDTH//4)
     HELP_WIDTH = FULL_WIDTH//4
-    def __init__(self, project, aims):
+    
+    def __init__(self, project, aim_flag):
         self._project = project if project is not None else "Unsaved Project"
-        self._aims = aims
+        self._aim_flag = aim_flag
+        self._aims = []
+        if aim_flag:
+            self._set_project_aims()
+
         self.set_initial()
     
+
+    def _set_project_aims(self):
+        for _ in range(5):
+            print("Add notes around an aim for the session:")
+            aim = input() 
+            self._aims.append(aim)
+            print("Do you want to add another aim? (y/n):")
+            another = input()
+            if another.lower() == "n":
+                break 
+        
+        print("Thanks")
+        print(self._aims)
+
     def set_initial(self):
         project_name_line = f"Currently Tracking for: {self._project}"
         space_left = (self.FULL_WIDTH - len(project_name_line) - 4)

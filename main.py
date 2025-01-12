@@ -13,12 +13,12 @@ parser.add_argument(
     "-a", 
     "--aims", 
     help="Aims for the session", 
-    default=[None]
+    action='store_true'
 )
 
 args = parser.parse_args()
 print(args.project, args.aims)
-vis = Visualiser(args.project)
+vis = Visualiser(args.project, args.aims)
 
 # print(timer)
 
