@@ -9,6 +9,10 @@ class Styles:
     WHITE = "\033[90m"
     GREEN = "\033[32m"
     STRONG_GREEN = "\033[92m"
+    YELLOW = "\033[33m"
+    STRONG_YELLOW = "\033[93m"
+    RED = "\033[31m"
+    STRONG_RED = "\033[91m"
 
 
 class Visualiser:
@@ -60,13 +64,24 @@ class Visualiser:
 
 
     def _print_stage(self):
-        swatch = {
-            "main": self.styles.GREEN, 
-            "highlight": self.styles.STRONG_GREEN
-        } 
-        print(f"{swatch['main']}=" * (self.AIMS_WIDTH-2))
+        if self.timer.stage == "Work":
+            swatch = {
+                "main": self.styles.GREEN, 
+                "highlight": self.styles.STRONG_GREEN
+            }
+        elif self.timer.stage == "Break":
+            swatch = {
+                "main": self.styles.YELLOW, 
+                "highlight": self.styles.STRONG_YELLOW
+            } 
+        elif self.timer.stage == "Long Break":
+            swatch = {
+                "main": self.styles.RED, 
+                "highlight": self.styles.STRONG_RED
+            } 
+        print(f"{swatch['main']}=" * (self.AIMS_WIDTH-2), '  ', f"{self.styles}")
         print(f"|| {self.timer.stage}{' '*(self.AIMS_WIDTH-(len(self.timer.stage)+7))}||")
-
+        print(f"{swatch['main']}=" * (self.AIMS_WIDTH-2))
 
     def __repr__(self):
         if self._seconds < 10:

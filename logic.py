@@ -49,7 +49,7 @@ class Timer:
         print(f"{self._minutes}:{seconds_string}")
         
     def count_down(self):
-        # self.print_stage()
+
         print("")
         while self._running: 
             start = perf_counter()
