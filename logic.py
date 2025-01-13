@@ -6,7 +6,7 @@ class Timer:
         
         self._minutes = work_length
         self._seconds = 0
-        self._stage = "Work"
+        self.stage = "Work"
         self._work_length = work_length
         self._break_length = break_length
         self._round = 0
@@ -35,10 +35,10 @@ class Timer:
         print("\033[A                                                                                                     \033[A")
     
     
-    def print_stage(self):
-        print(f"""------------------------------------------------------
-{self._stage}
-------------------------------------------------------""")
+#     def print_stage(self):
+#         print(f"""------------------------------------------------------
+# {self._stage}
+# ------------------------------------------------------""")
     
 
     def print_time(self):
@@ -49,7 +49,7 @@ class Timer:
         print(f"{self._minutes}:{seconds_string}")
         
     def count_down(self):
-        self.print_stage()
+        # self.print_stage()
         print("")
         while self._running: 
             start = perf_counter()
