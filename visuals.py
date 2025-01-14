@@ -66,22 +66,28 @@ class Visualiser:
     def _print_stage(self):
         if self.timer.stage == "Work":
             swatch = {
-                "main": self.styles.GREEN, 
-                "highlight": self.styles.STRONG_GREEN
+                "main": f"{self.styles.NORMAL}{self.styles.GREEN}", 
+                "highlight": f"{self.styles.STRONG_GREEN}{self.styles.UNDERLINE}"
             }
         elif self.timer.stage == "Break":
             swatch = {
-                "main": self.styles.YELLOW, 
-                "highlight": self.styles.STRONG_YELLOW
+                "main": f"{self.styles.NORMAL}{self.styles.YELLOW}", 
+                "highlight": f"{self.styles.STRONG_YELLOW}{self.styles.UNDERLINE}"
             } 
         elif self.timer.stage == "Long Break":
             swatch = {
                 "main": self.styles.RED, 
                 "highlight": self.styles.STRONG_RED
             } 
-        print(f"{swatch['main']}=" * (self.AIMS_WIDTH-2), '  ', f"{self.styles}")
-        print(f"|| {self.timer.stage}{' '*(self.AIMS_WIDTH-(len(self.timer.stage)+7))}||")
-        print(f"{swatch['main']}=" * (self.AIMS_WIDTH-2))
+        print(f"{swatch['main']}=" * (self.AIMS_WIDTH-2), ' ', f"{self.styles.WHITE}{'=' * (self.HELP_WIDTH - 1)}")
+        print(f"{swatch['main']}|| {swatch['highlight']}{self.timer.stage.upper()}{swatch['main']}{' '*(self.AIMS_WIDTH-(len(self.timer.stage)+7))}||", ' ', f"{self.styles.WHITE}|| {self.styles.UNDERLINE}ROUND:{self.styles.NORMAL}{self.styles.WHITE}{' '*(self.HELP_WIDTH - 12)}||") 
+        print(f"{swatch['main']}|| {' '*(self.AIMS_WIDTH-7)}||", ' ', f"{self.styles.WHITE}|| {'I' * self.timer.round}{self.styles.NORMAL}{self.styles.WHITE}{' '*(self.HELP_WIDTH - (self.timer.round + 6))}||")
+        print(f"{swatch['main']}=" * (self.AIMS_WIDTH-2), ' ', f"{self.styles.WHITE}{'=' * (self.HELP_WIDTH - 1)}")
+
+
+    def clear_line(self, n):
+        for _ in range(n):
+            print("\033[A                                                                                                     \033[A")
 
     def __repr__(self):
         if self._seconds < 10:

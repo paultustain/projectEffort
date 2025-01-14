@@ -1,6 +1,5 @@
 from time import sleep, perf_counter
 
-
 class Timer:
     def __init__(self, work_length=25, break_length=5):
         
@@ -9,7 +8,7 @@ class Timer:
         self.stage = "Work"
         self._work_length = work_length
         self._break_length = break_length
-        self._round = 0
+        self.round = 1
         self._running = True
         self._reset_stage = False
 
@@ -18,13 +17,13 @@ class Timer:
             self._seconds = 59
             if self._minutes == 0:
                 self._reset_stage = True
-                if self._stage == "Work":
+                if self.stage == "Work":
                     self._minutes = self._break_length
-                    self._stage = "Break"
+                    self.stage = "Break"
                 else:
                     self._minutes = self._work_length
-                    self._stage = "Work"
-                    self._running = False
+                    self.stage = "Work"
+                    self.round += 1
                 self._seconds = 0
             else:
                 self._minutes -= 1
@@ -48,6 +47,7 @@ class Timer:
             seconds_string = str(self._seconds)
         print(f"{self._minutes}:{seconds_string}")
         
+
     def count_down(self):
 
         print("")
@@ -62,10 +62,8 @@ class Timer:
             self.print_time()
             self.get_next()
 
-            sleep(1 - (perf_counter() - start))
+            sleep(0.01 - (perf_counter() - start))
 
 
-
-        # sleep(1)
 
     
